@@ -10,7 +10,7 @@ The function will:
 
  3. Return the count.
 
-### Implementation ###  Function is found in the main.py file.
+### Implementation   Function is found in the main.py file.
 
 ### Explanation of the Function:
  1. Word Matching:A "standalone word" is defined as a sequence of characters separated by spaces. ◦ Matching is case-insensitive (e.g., "Cat" matches "cat").
