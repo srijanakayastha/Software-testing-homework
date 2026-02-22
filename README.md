@@ -1,112 +1,104 @@
-🧪 Word Matching Function — Pytest Test Suite
-📌 Overview
-This repository demonstrates professional Python testing practices using pytest. It focuses on validating a text-processing function through parameterized tests, edge-case coverage, and negative testing.
-The goal of this project is to showcase:
-* Clean test design
-* Robust validation of real-world input scenarios
-* Defensive programming practices
-* Maintainable test architecture
-This project is suitable as a portfolio example for QA, backend, and Python developer roles.
+### 🧪 ****Word Matching Function — Overview**** - **Pytest Test Suite**
 
-🧠 Core Functionality
-🔹 count_word_matches(text, target)
-The function counts how many times a target word appears as a standalone word in a string.
-✔ Behavior
-* Case-insensitive matching
-* Words are separated by spaces
-* Only exact standalone matches are counted
-* Returns 0 if inputs are empty
-* Raises TypeError for invalid input types
-📍 Implementation Location
+This project tests a Python function that counts how many times a word appears in a string as a **standalone match**.
+The test suite validates normal behaviour, edge cases, and invalid inputs.
 
+🔹 **Function**: count_word_matches(text, target)
+✔ **Purpose**
 
-main.py
+The function:
 
+1. Accepts two inputs:
 
-🧪 Testing Strategy
-The test suite is designed to mirror real production-level validation layers.
+ - `text` → a string of words
 
-✅ 1. Functional Tests (Parameterized)
-File:
+ - `target` → a single word to search for
 
+2. Counts how many times the target appears as a standalone word
 
-test_count_word_matches_basic.py
+   - Matching is **case-insensitive**
 
-Validates:
-* Normal usage scenarios
-* Case-insensitive matching
-* Word boundary handling
-* Multiple occurrences
-These tests ensure the function behaves correctly for typical inputs.
+3. Returns the total number of matches.
 
-⚠️ 2. Edge-Case Tests
-File:
+📍 The implementation is located in:
 
+    main.py
 
-test_count_word_matches_edge_cases.py
+**🧠 How the Function Works**
 
-Covers:
-* Empty strings
-* Extra whitespace
-* Leading/trailing spaces
-* Single-character words
-* Punctuation handling limitations
-These tests ensure stability when processing messy real-world text.
+**1. Word Matching Logic**
 
-❌ 3. Negative Tests (Defensive Validation)
-File:
+- A **standalone word** is defined as a sequence of characters separated by spaces.
 
+- Matching is case-insensitive
 
-test_count_word_matches_negative.py
+`Example: "Cat" matches "cat"`
 
-Ensures the function properly rejects invalid inputs:
-* None
-* Integers
-* Lists
-* Non-string parameters
-This demonstrates type safety enforcement and error handling.
+**2. Input Handling**
 
-🧰 Tech Stack
-* Python 3
-* Pytest
-* Parameterized testing
-* Exception validation
-* CLI-based test execution
+- The function splits the input text into words using spaces as delimiters.
 
-⚙️ Setup & Installation
-Clone the repository:
+- If either `text` or `target` is empty, the function returns:
 
+0
+**3. Counting Matches**
 
-git clone <your-repo-url>
-cd <repo-name>
+- Words are normalized to the same case
 
-Install dependencies:
+- Python’s `list.count()` is used to count exact matches in the split word list
 
+| Text | Target | Expected Result | Notes |
+|------|--------|-----------------|-------|
+| `"The cat sat on the mat"` | `"cat"` | **1** | Only standalone match |
+| `"Dog dog DOG dOg"` | `"dog"` | **4** | Case-insensitive |
+| `"Hello world"` | `"world"` | **1** | Basic match |
+| `"hello hello HELLO"` | `"hello"` | **3** | Multiple matches |
+| `"No matches here"` | `"yes"` | **0** | No occurrences |
+| `"catcat cat catdog"` | `"cat"` | **1** | Only standalone counts |
+| `"a a a"` | `"a"` | **3** | Single-character matches |
 
-pip install pytest
+### Exercise 2: Edge Case Testing ###
+Test the **count_word_matches** function using parameterized tests. Focus on empty inputs, spaces, and punctuation. Implemented test cases are found in the test_count_word_matches_edge_cases.py file.
 
+## ⚠️ Edge Case Test Scenarios
 
-▶️ Running the Test Suite
-Run all tests:
+| Scenario | Text | Target | Expected | Notes |
+|----------|------|--------|----------|-------|
+| Empty text | `""` | `"word"` | **0** | No input text |
+| Empty target | `"hello world"` | `""` | **0** | Nothing to match |
+| Both empty | `""` | `""` | **0** | Function handles empty inputs |
+| Multiple spaces | `"hello  world"` | `"world"` | **1** | Extra spaces ignored |
+| Leading/trailing spaces | `" cat "` | `"cat"` | **1** | Trimmed during split |
+| Punctuation limitation | `"cat,dog cat"` | `"cat"` | **1** | Only space-separated words counted |
+| Single character | `"x y z"` | `"x"` | **1** | Works for short tokens |
 
+### Exercise 3: Negative Testing ###
+Test the function for invalid inputs like None, integers, or lists to ensure it raises the appropriate exceptions. Implemented test cases are found in the test_count_word_matches_negative.py file.
 
-pytest -v
+## ❌ Negative Test Scenarios (Invalid Inputs)
+
+| Scenario | Text Input | Target Input | Expected Exception | Purpose |
+|----------|------------|--------------|--------------------|---------|
+| None text | `None` | `"word"` | **TypeError** | Reject non-string text |
+| None target | `"hello world"` | `None` | **TypeError** | Reject non-string target |
+| Integer text | `123` | `"word"` | **TypeError** | Enforce type safety |
+| Integer target | `"hello world"` | `456` | **TypeError** | Prevent invalid comparisons |
+| List as text | `["hello","world"]` | `"world"` | **TypeError** | Only strings allowed |
+| List as target | `"hello world"` | `["world"]` | **TypeError** | Validate parameter type |
+
+▶️ Running the Tests
+
+1️⃣ Install pytest
+
+    Install pytest in your environment (PyCharm terminal or system terminal):
+
+    pip install pytest
+2️⃣ Execute the test suite
+
+From the project root directory, run:
+
+    pytest -v
 
 Or simply:
 
-
-pytest
-
-
-📁 Project Structure
-
-
-.
-├── main.py
-├── test_count_word_matches_basic.py
-├── test_count_word_matches_edge_cases.py
-├── test_count_word_matches_negative.py
-└── README.md
-
-
-
+    pytest
