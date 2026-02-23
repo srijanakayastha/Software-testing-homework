@@ -1,4 +1,4 @@
-### 🧪 ****Pytest-Testing-word-matching function - basic, edge cases and negative testing**** 
+### 🧪 ##Pytest-Testing-word-matching function - basic, edge cases and negative testing##
 
 This project tests a Python function that counts how many times a word appears in a string as a **standalone match**.
 The test suite validates normal behaviour, edge cases, and invalid inputs.
