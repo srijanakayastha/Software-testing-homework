@@ -38,9 +38,9 @@ The function:
 
 - The function splits the input text into words using spaces as delimiters.
 
-- If either `text` or `target` is empty, the function returns:
+- If either `text` or `target` is empty, the function returns:0
 
-0
+
 **3. Counting Matches**
 
 - Words are normalized to the same case
